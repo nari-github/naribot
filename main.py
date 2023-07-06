@@ -6,15 +6,12 @@ client = discord.Client(intents=discord.Intents.default())
 
 @client.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print('ログインしました')
 
 @client.event
 async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+    emoji ="👍"
+    await message.add_reaction(emoji)
 
 client.run(token)
 
