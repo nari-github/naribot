@@ -38,7 +38,7 @@ async def on_message(message):
     # メッセージにリアクション追加
     # emoji ="👍"
     time.sleep(1)
-    await message.add_reaction("<:watashi_okage:1126427186627358831>")
+    await message.add_reaction("<:watashi_okage:989196108486033449>")
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$neko'):
