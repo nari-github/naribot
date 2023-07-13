@@ -1,6 +1,7 @@
 import discord
 import os
 import time
+import socket
 
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
@@ -37,7 +38,11 @@ async def on_message(message):
     # メッセージにリアクション追加
     # emoji ="👍"
     time.sleep(1)
-    await message.add_reaction("<:watashi_okage:989196108486033449>")
+    #await message.add_reaction("<:watashi_okage:989196108486033449>")
+
+    host = socket.gethostname()
+    ip = socket.gethostbyname(host)
+    message.channel.send(ip)
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$neko'):
