@@ -21,22 +21,18 @@ async def on_ready():
 async def on_message(message):
     if message.author.bot:
         time.sleep(1)
-        await message.add_reaction(":o:")
-        time.sleep(1)
-        await message.add_reaction(":small_red_triangle:")
-        time.sleep(1)
-        await message.add_reaction(":x:")
+        message.add_reaction("<:watashi_okage:989196108486033449>")
         return
         
     # 自分のメッセージを無効
-    if message.author == client.user:
-        time.sleep(1)
-        await message.add_reaction(":o:")
-        time.sleep(1)
-        await message.add_reaction(":small_red_triangle:")
-        time.sleep(1)
-        await message.add_reaction(":x:")
-        return
+    #if message.author == client.user:
+    #    time.sleep(1)
+    #    await message.add_reaction(":o:")
+    #    time.sleep(1)
+    #    await message.add_reaction(":small_red_triangle:")
+    #    time.sleep(1)
+    #    await message.add_reaction(":x:")
+    #    return
 
     # メッセージにリアクション追加
     # emoji ="👍"
