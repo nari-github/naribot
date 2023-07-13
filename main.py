@@ -26,6 +26,10 @@ async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
 
+@bot.commands
+async def neko(ctx):
+    await ctx.send('にゃーん(=^・^=)')
+
 # クライアントの実行
 client.run(token)
 
