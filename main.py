@@ -1,13 +1,14 @@
-from discord.ext import commands
-
 import discord
 import os
 
-bot = commands.Bot(command_prefix='/')
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
+# インテントの生成
+intents = discord.Intents.default()
+intents.message_content = True
+
 # クライアントの生成
-client = discord.Client(intents=discord.Intents.default())
+client = discord.Client(intents=intents)
 
 # discordと接続した時に呼ばれる
 @client.event
@@ -26,14 +27,8 @@ async def on_message(message):
     await message.add_reaction(emoji)
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
-
-    await bot.process_commands(message)
-
-@bot.commands
-async def neko(ctx):
-    await ctx.send('にゃーん(=^・^=)')
+    if message.content.startswith('$neko'):
+        await message.channel.send('にゃーん(=^・^=)')
 
 # クライアントの実行
 client.run(token)
