@@ -20,8 +20,11 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.author.bot:
+        time.sleep(1)
         await message.add_reaction(":o:")
+        time.sleep(1)
         await message.add_reaction(":small_red_triangle:")
+        time.sleep(1)
         await message.add_reaction(":x:")
         return
         
