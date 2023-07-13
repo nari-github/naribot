@@ -20,6 +20,9 @@ async def on_ready():
 async def on_message(message):
     # 自分のメッセージを無効
     if message.author == client.user:
+        await message.add_reaction(":o:")
+        await message.add_reaction(":small_red_triangle:")
+        await message.add_reaction(":x:")
         return
 
     # メッセージにリアクション追加
@@ -29,6 +32,9 @@ async def on_message(message):
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$neko'):
         await message.channel.send('にゃーん(=^・^=)')
+
+    if message.content.startswith('/レギマ'):
+        await message.channel.send('7/30（日）')
 
 # クライアントの実行
 client.run(token)
