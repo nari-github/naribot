@@ -1,6 +1,9 @@
+from discord.ext import commands
+
 import discord
 import os
 
+bot = commands.Bot(command_prefix='/')
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
 # クライアントの生成
@@ -25,6 +28,8 @@ async def on_message(message):
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+
+    await bot.process_commands(message)
 
 @bot.commands
 async def neko(ctx):
