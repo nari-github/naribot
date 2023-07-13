@@ -46,7 +46,7 @@ async def on_message(message):
 
     if message.content.startswith('/レギマ'):
         time.sleep(1)
-        await message.channel.send('7/30（日）')
+        await message.channel.send('7/20（日）')
         return
 
 # クライアントの実行
