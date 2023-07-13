@@ -1,5 +1,6 @@
 import discord
 import os
+import time
 
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
@@ -26,13 +27,17 @@ async def on_message(message):
         
     # 自分のメッセージを無効
     if message.author == client.user:
+        time.sleep(1)
         await message.add_reaction(":o:")
+        time.sleep(1)
         await message.add_reaction(":small_red_triangle:")
+        time.sleep(1)
         await message.add_reaction(":x:")
         return
 
     # メッセージにリアクション追加
     emoji ="👍"
+    time.sleep(1)
     await message.add_reaction(":watashi_okage:")
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
@@ -41,6 +46,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('/レギマ'):
+        time.sleep(1)
         await message.channel.send('7/30（日）')
         return
 
