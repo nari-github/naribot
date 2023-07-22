@@ -2,6 +2,16 @@ import discord
 import os
 import time
 import socket
+import sys
+
+allow_ip = os.getenv("ALLOW_IP")
+
+host = socket.gethostname()
+ip = socket.gethostbyname(host)
+
+if allow_ip != ip:
+    sys.stdout.write(ip)
+    return
 
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
@@ -21,7 +31,6 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.author.bot:
-        time.sleep(1)
         message.add_reaction("<:watashi_okage:989196108486033449>")
         return
         
@@ -37,12 +46,7 @@ async def on_message(message):
 
     # メッセージにリアクション追加
     # emoji ="👍"
-    time.sleep(1)
     #await message.add_reaction("<:watashi_okage:989196108486033449>")
-
-    host = socket.gethostname()
-    ip = socket.gethostbyname(host)
-    await message.channel.send(ip)
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$neko'):
