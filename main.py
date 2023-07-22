@@ -29,32 +29,24 @@ client = discord.Client(intents=intents)
 # discordと接続した時に呼ばれる
 @client.event
 async def on_ready():
-    sys.stdout.write("ログインしました")
+    sys.stdout.write("login OK")
 
 # メッセージを受信した時に呼ばれる
 @client.event
 async def on_message(message):
     if message.author.bot:
-        sys.stdout.write("1つ目")
-        message.add_reaction("<:watashi_okage:989196108486033449>")
         return
         
     # 自分のメッセージを無効
     if message.author == client.user:
-        sys.stdout.write("2つ目")
-        message.add_reaction("<:watashi_okage:989196108486033449>")
         return
-    #    time.sleep(1)
-    #    await message.add_reaction(":o:")
-    #    time.sleep(1)
-    #    await message.add_reaction(":small_red_triangle:")
-    #    time.sleep(1)
-    #    await message.add_reaction(":x:")
-    #    return
 
     # メッセージにリアクション追加
     # emoji ="👍"
     #await message.add_reaction("<:watashi_okage:989196108486033449>")
+    await message.add_reaction(":o:")
+    await message.add_reaction(":small_red_triangle:")
+    await message.add_reaction(":x:")
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$neko'):
