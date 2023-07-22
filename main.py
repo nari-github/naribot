@@ -5,19 +5,17 @@ import socket
 import sys
 import requests
 
-res = requests.get('https://ifconfig.me')
-sys.stdout.write(res.text)
-
 allow_ip = os.getenv("ALLOW_IP")
 
-host = socket.gethostname()
-ip = socket.gethostbyname(host)
+#host = socket.gethostname()
+#ip = socket.gethostbyname(host)
+my_ip = requests.get('https://ifconfig.me')
 
-if allow_ip != ip:
-    sys.stdout.write("NG:{}".format(ip))
+if allow_ip != my_ip.text:
+    sys.stdout.write("NG:{}".format(my_ip.text))
     sys.exit()
 
-sys.stdout.write("OK:{}".format(ip))
+sys.stdout.write("OK:{}".format(my_ip.text))
 
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
