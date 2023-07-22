@@ -11,7 +11,7 @@ ip = socket.gethostbyname(host)
 
 if allow_ip != ip:
     sys.stdout.write(ip)
-    return
+    sys.exit()
 
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
