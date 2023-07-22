@@ -35,11 +35,15 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.author.bot:
+        sys.stdout.write("1つ目")
         message.add_reaction("<:watashi_okage:989196108486033449>")
         return
         
     # 自分のメッセージを無効
-    #if message.author == client.user:
+    if message.author == client.user:
+        sys.stdout.write("2つ目")
+        message.add_reaction("<:watashi_okage:989196108486033449>")
+        return
     #    time.sleep(1)
     #    await message.add_reaction(":o:")
     #    time.sleep(1)
@@ -64,4 +68,3 @@ async def on_message(message):
 
 # クライアントの実行
 client.run(token)
-
