@@ -10,8 +10,10 @@ host = socket.gethostname()
 ip = socket.gethostbyname(host)
 
 if allow_ip != ip:
-    sys.stdout.write(ip)
+    sys.stdout.write("NG:{}".format(ip))
     sys.exit()
+
+sys.stdout.write("OK:{}".format(ip))
 
 token = os.getenv("DISCORD_TOKEN") #Your TOKEN
 
