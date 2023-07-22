@@ -4,6 +4,9 @@ import time
 import socket
 import sys
 
+res = requests.get('https://ifconfig.me')
+sys.stdout.write(res.text)
+
 allow_ip = os.getenv("ALLOW_IP")
 
 host = socket.gethostname()
@@ -27,7 +30,7 @@ client = discord.Client(intents=intents)
 # discordと接続した時に呼ばれる
 @client.event
 async def on_ready():
-    print('ログインしました')
+    sys.stdout.write("ログインしました")
 
 # メッセージを受信した時に呼ばれる
 @client.event
