@@ -42,7 +42,7 @@ async def on_message(message):
 
     host = socket.gethostname()
     ip = socket.gethostbyname(host)
-    message.channel.send(ip)
+    await message.channel.send(ip)
 
     # メッセージが"$hello"で始まっていたら"Hello!"と応答
     if message.content.startswith('$neko'):
