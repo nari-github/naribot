@@ -3,6 +3,7 @@ import os
 import time
 import socket
 import sys
+import requests
 
 res = requests.get('https://ifconfig.me')
 sys.stdout.write(res.text)
