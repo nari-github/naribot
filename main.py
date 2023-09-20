@@ -1,3 +1,7 @@
+# /match [月] [レギリ開始日]-[レギリ終了日] [CS開催日（カンマ区切り）]
+# 例）8月の出欠、8/8～8/13がレギマ、8/15と8/18と8/20がCS
+# /match 8 8-13 15,18,20
+
 import discord
 import os
 import sys
@@ -21,12 +25,14 @@ async def on_ready():
 # メッセージを受信した時に呼ばれる
 @client.event
 async def on_message(message):
-  # 自分のメッセージを無効
+  # 自分のメッセージの場合
   if message.author.bot:
     # https://emojipedia.org/
     await message.add_reaction('⭕')
     await message.add_reaction('🔺')
     await message.add_reaction('❌')
+    # await message.add_reaction('🔈')
+    # await message.add_reaction('🔇')
     return
 
   # メッセージにリアクション追加
@@ -40,16 +46,22 @@ async def on_message(message):
     day = 1 # 通知開始日
     league_flg = False
     prefix = ''
+    suffix = ''
     has_league_day = False
+    has_cs_day = False
+    cs_count = 1;
 
     # 引数取得
     args = message.content.split('/match ', 1)
-    if args[1:2]:
+    if args[1:3]:
       month = args[1].split(' ')[0]
       if args[1].split(' ')[1:2]:
         start = args[1].split(' ')[1].split('-')[0]
         end = args[1].split(' ')[1].split('-')[1]
         has_league_day = True
+      if args[1].split(' ')[2:3]:
+        cs_list = args[1].split(' ')[2].split(',')
+        has_cs_day = True
     else:
       month = datetime.datetime.now().month
 
@@ -70,15 +82,29 @@ async def on_message(message):
           if league_flg == True:
             prefix = '＝＝＝＝＝ここまでレギリ＝＝＝＝＝\n'
             league_flg = False
+
+      # CS開催日判定
+      if has_cs_day:
+        if str(day) in cs_list:
+          suffix = '（CS' + str(cs_count) + '回戦）'
   
       # リーグ期間中は毎日通知
       if league_flg == True:
-        await message.channel.send(prefix + date_obj.strftime('%m/%d') + '（' + week_list[date_obj.weekday()] + '）')
+        await message.channel.send(prefix + date_obj.strftime('%m/%d') + '（' + week_list[date_obj.weekday()] + '）' + suffix)
         prefix = ''
+        suffix = ''
+      # CS開催日は通知
+      elif has_cs_day == True and str(day) in cs_list:
+        suffix = '（CS' + str(cs_count) + '回戦）'
+        await message.channel.send(prefix + date_obj.strftime('%m/%d') + '（' + week_list[date_obj.weekday()] + '）' + suffix)
+        prefix = ''
+        suffix = ''
+        cs_count = cs_count + 1
       # 特定曜日のみ通知
       elif date_obj.weekday() in match_week_list:
-        await message.channel.send(prefix + date_obj.strftime('%m/%d') + '（' + week_list[date_obj.weekday()] + '）')
+        await message.channel.send(prefix + date_obj.strftime('%m/%d') + '（' + week_list[date_obj.weekday()] + '）' + suffix)
         prefix = ''
+        suffix = ''
       
       day = day + 1
     return
